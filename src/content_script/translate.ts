@@ -108,12 +108,8 @@ export async function translate(query: TranslateQuery) {
             }
             break
         case 'grammar-checker':
-            systemPrompt = 
-                `You are an English grammar checker, similar to Grammarly. Your output should be like this:
-                1. {error1} in line {number} : {correction1} : {resoning}
-                2. {error2} in line {number} : {correction2} : {resoning}
-                ...`
-            assistantPrompt = 'Please identify any spelling or grammar errors.'
+            systemPrompt = 'You are a grammar checker, as same as Grammarly.'
+            assistantPrompt = 'Please check the grammar and suggest any necessary corrections. Your output should only include a list of corrections and explanations.'
             break
     }
 
