@@ -3,7 +3,7 @@ import * as utils from '../common/utils'
 import * as lang from './lang'
 import { fetchSSE } from './utils'
 
-export type TranslateMode = 'translate' | 'polishing' | 'summarize' | 'analyze' | 'explain-code'
+export type TranslateMode = 'translate' | 'polishing' | 'summarize' | 'analyze' | 'explain-code' | 'grammar-checker'
 export type Provider = 'OpenAI' | 'Azure'
 
 export interface TranslateQuery {
@@ -106,6 +106,14 @@ export async function translate(query: TranslateQuery) {
                     lang.langMap.get(query.detectTo) || query.detectTo
                 } language! If the content is not code, return an error message. If the code has obvious errors, point them out.`
             }
+            break
+        case 'grammar-checker':
+            systemPrompt = 
+                `You are an English grammar checker, similar to Grammarly. Your output should be like this:
+                1. {error1} in line {number} : {correction1} : {resoning}
+                2. {error2} in line {number} : {correction2} : {resoning}
+                ...`
+            assistantPrompt = 'Please identify any spelling or grammar errors.'
             break
     }
 

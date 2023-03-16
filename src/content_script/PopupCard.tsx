@@ -9,7 +9,7 @@ import { createUseStyles } from 'react-jss'
 import { AiOutlineTranslation } from 'react-icons/ai'
 import { IoSettingsOutline, IoColorPaletteOutline } from 'react-icons/io5'
 import { TbArrowsExchange } from 'react-icons/tb'
-import { MdOutlineSummarize, MdOutlineAnalytics, MdCode } from 'react-icons/md'
+import { MdOutlineSummarize, MdOutlineAnalytics, MdCode, MdCheck } from 'react-icons/md'
 import { StatefulTooltip } from 'baseui/tooltip'
 import { detectLang, supportLanguages } from './lang'
 import { translate, TranslateMode } from './translate'
@@ -281,6 +281,10 @@ const actionStrItems: Record<TranslateMode, IActionStrItem> = {
     'explain-code': {
         beforeStr: 'Explaining...',
         afterStr: 'Explained',
+    },
+    'grammar-checker': {
+        beforeStr: 'Checking...',
+        afterStr: 'Checked',
     },
 }
 
@@ -909,6 +913,22 @@ export function PopupCard(props: IPopupCardProps) {
                                                 onClick={() => setTranslateMode('translate')}
                                             >
                                                 <AiOutlineTranslation />
+                                            </Button>
+                                        </StatefulTooltip>
+                                        <StatefulTooltip
+                                            content='Grammar Check'
+                                            placement={isDesktopApp() ? 'auto' : 'top'}
+                                            showArrow
+                                        >
+                                            <Button
+                                                size='mini'
+                                                kind={translateMode === 'grammar-checker' ? 'primary' : 'secondary'}
+                                                onClick={() => {
+                                                    setTranslateMode('grammar-checker')
+                                                    setDetectTo(detectFrom)
+                                                }}
+                                            >
+                                                <MdCheck />
                                             </Button>
                                         </StatefulTooltip>
                                         <StatefulTooltip
